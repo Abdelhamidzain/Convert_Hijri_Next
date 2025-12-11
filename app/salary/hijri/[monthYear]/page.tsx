@@ -1,5 +1,6 @@
 'use client'
 
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { PageLayout } from '@/components/PageLayout';
 import { SEOHead, generateWebPageSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/components/SEOHead';

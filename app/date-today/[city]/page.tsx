@@ -1,5 +1,7 @@
 'use client'
 
+import { redirect } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 import Link from 'next/link';
 import { getTodayDates } from '@/lib/hijriConverter';
@@ -15,7 +17,7 @@ export default function CityDate() {
   
   // Redirect if city not found
   if (!cityData) {
-    return <Navigate to="/date/today" replace />;
+    redirect('/date/today');
   }
   
   const seo = generateCityDateSEO(city!);
@@ -100,7 +102,7 @@ export default function CityDate() {
             {CITIES.filter(c => c.slug !== city).slice(0, 8).map(c => (
               <Link 
                 key={c.slug}
-                to={`/date-today/${c.slug}`}
+                href={`/date-today/${c.slug}`}
                 className="block p-3 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors text-sm text-center"
               >
                 {c.name}

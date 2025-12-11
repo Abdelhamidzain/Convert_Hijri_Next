@@ -1,5 +1,7 @@
 'use client'
 
+import { redirect } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { hijriToGregorian, formatGregorianDate, getHijriMonths, isValidHijriDate } from '@/lib/hijriConverter';
@@ -22,7 +24,7 @@ export default function HijriToGregorianYear() {
   
   // Validate year range
   if (isNaN(hijriYear) || hijriYear < HIJRI_YEAR_RANGE.start || hijriYear > HIJRI_YEAR_RANGE.end) {
-    return <Navigate to="/date/today" replace />;
+    redirect('/date/today');
   }
   
   const seo = generateHijriToGregorianSEO(hijriYear);

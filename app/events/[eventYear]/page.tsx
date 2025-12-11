@@ -1,5 +1,6 @@
 'use client'
 
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { PageLayout } from '@/components/PageLayout';
 import { SEOHead, generateWebPageSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/components/SEOHead';
@@ -174,7 +175,7 @@ export default function IslamicEvents() {
           {[year - 1, year, year + 1].map((y) => (
             <Link
               key={y}
-              to={`/events/${eventSlug}-${y}`}
+              href={`/events/${eventSlug}-${y}`}
               className={`px-4 py-2 rounded-lg ${y === year 
                 ? 'bg-primary text-primary-foreground' 
                 : 'bg-secondary text-foreground hover:bg-secondary/80'}`}
