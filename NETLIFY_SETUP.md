@@ -8,14 +8,22 @@
 
 ### 1️⃣ Build Settings
 
-في لوحة تحكم Netlify → Site Settings → Build & Deploy:
+⭐ **الحل الأسهل:** استخدم ملف `netlify.toml` الموجود في المشروع (يضبط الإعدادات تلقائياً!)
+
+**أو** اضبط يدوياً في لوحة تحكم Netlify → Site Settings → Build & Deploy:
 
 ```
 Build command: npm run build
 Publish directory: .next
 ```
 
-⚠️ **مهم:** الـ Publish directory يجب أن يكون `.next` وليس `dist`
+⚠️ **مهم جداً:** الـ Publish directory يجب أن يكون `.next` وليس `dist`
+
+🔴 **إذا كان عندك `dist` في الإعدادات:**
+1. اذهب إلى Site Settings → Build & Deploy → Build Settings
+2. اضغط Edit Settings
+3. غيّر Publish directory من `dist` إلى `.next`
+4. احفظ التغييرات
 
 ---
 
