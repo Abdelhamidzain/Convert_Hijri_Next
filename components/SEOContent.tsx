@@ -153,24 +153,7 @@ const SEOContent: React.FC = () => {
     { num: 12, name: "ذو الحجة", note: "الحج والأضحى" },
   ];
 
-  const faqs: { q: string; a: string }[] = [
-    {
-      q: "كيف أعرف تاريخ اليوم هجري؟",
-      a: "يظهر تاريخ اليوم هجري وميلادي تلقائياً في أعلى الصفحة.",
-    },
-    {
-      q: "كيف أحول التاريخ من هجري لميلادي؟",
-      a: 'اختر "هجري ← ميلادي" ثم أدخل التاريخ واضغط تحويل.',
-    },
-    {
-      q: "ما الفرق بين التاريخ الهجري والميلادي؟",
-      a: "التقويم الهجري قمري (354-355 يوم) بينما الميلادي شمسي (365-366 يوم).",
-    },
-    {
-      q: "هل الأداة دقيقة؟",
-      a: "نعم، نستخدم خوارزمية تقويم أم القرى المعتمدة.",
-    },
-  ];
+  // FAQ Section removed to avoid duplication with main page FAQ
 
   const occasions: string[] = [
     "شهر رمضان - شهر الصيام المبارك (الشهر التاسع هجري)",
@@ -346,23 +329,7 @@ const SEOContent: React.FC = () => {
         </div>
       </article>
 
-      {/* FAQ Section */}
-      <article className="bg-card rounded-2xl p-6 md:p-8 shadow-soft border border-border/30">
-        <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
-          <CalendarIcon />
-          أسئلة شائعة
-        </h2>
-        <div className="space-y-6">
-          {faqs.map((item, i) => (
-            <div key={i}>
-              <h3 className="font-semibold text-foreground mb-2">
-                {item.q}
-              </h3>
-              <p className="text-foreground/70">{item.a}</p>
-            </div>
-          ))}
-        </div>
-      </article>
+      {/* FAQ Section removed - now in main page only */}
     </section>
   );
 };
