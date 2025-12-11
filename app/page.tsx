@@ -76,7 +76,7 @@ const faqSchema = {
       "name": "كيف أعرف تاريخ اليوم هجري؟",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "يظهر تاريخ اليوم بالتقويم الهجري والميلادي تلقائياً في أعلى صفحة محول التاريخ. التاريخ يتم تحديثه يومياً ويعتمد على تقويم أم القرى الرسمي."
+        "text": "يظهر تاريخ اليوم بالتقويم الهجري والميلادي تلقائياً في أعلى صفحة محول التاريخ. التاريخ يتم تحديثه يومياً ويعتمد على تقويم أم القرى الرسمي المعتمد في المملكة العربية السعودية."
       }
     },
     {
@@ -84,7 +84,7 @@ const faqSchema = {
       "name": "كيف أحول التاريخ من هجري لميلادي؟",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "لتحويل التاريخ من هجري إلى ميلادي: 1) اختر 'هجري إلى ميلادي' من أزرار التحويل. 2) أدخل اليوم والشهر والسنة الهجرية. 3) اضغط زر 'تحويل' للحصول على التاريخ الميلادي المقابل فوراً."
+        "text": "لتحويل التاريخ من هجري إلى ميلادي اتبع الخطوات التالية: 1) اختر هجري إلى ميلادي من أزرار التحويل 2) أدخل اليوم والشهر والسنة الهجرية 3) اضغط زر تحويل للحصول على التاريخ الميلادي المقابل فوراً بدقة عالية."
       }
     },
     {
@@ -92,9 +92,49 @@ const faqSchema = {
       "name": "كيف أحول التاريخ من ميلادي لهجري؟",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "لتحويل التاريخ من ميلادي إلى هجري: 1) اختر 'ميلادي إلى هجري' من أزرار التحويل. 2) أدخل اليوم والشهر والسنة الميلادية. 3) اضغط زر 'تحويل' للحصول على التاريخ الهجري المقابل."
+        "text": "لتحويل التاريخ من ميلادي إلى هجري اتبع الخطوات: 1) اختر ميلادي إلى هجري من أزرار التحويل 2) أدخل اليوم والشهر والسنة الميلادية 3) اضغط زر تحويل للحصول على التاريخ الهجري المقابل بدقة مطابقة لتقويم أم القرى."
       }
     },
+    {
+      "@type": "Question",
+      "name": "هل تحويل التاريخ دقيق؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نعم، محول التاريخ يوفر دقة عالية في تحويل التاريخ بين التقويم الهجري والميلادي. نستخدم خوارزميات معتمدة ومطابقة لتقويم أم القرى الرسمي المعتمد في المملكة العربية السعودية."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "هل الموقع مجاني؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نعم، جميع خدمات محول التاريخ مجانية بالكامل. يمكنك تحويل التاريخ، حساب العمر، الاطلاع على التقويم الهجري، ومعرفة تاريخ اليوم بدون أي رسوم أو اشتراكات."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف أحسب عمري بالهجري؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "يوفر الموقع أداة خاصة لحساب العمر بالتقويم الهجري. انتقل إلى صفحة حساب العمر، أدخل تاريخ ميلادك الهجري أو الميلادي، وسيحسب الموقع عمرك بالسنوات والأشهر والأيام الهجرية بدقة."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما هو تقويم أم القرى؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "تقويم أم القرى هو التقويم الهجري الرسمي المعتمد في المملكة العربية السعودية. يتم استخدامه في جميع المعاملات الرسمية والوثائق الحكومية. محول التاريخ يعتمد على هذا التقويم لضمان الدقة."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف أعرف التقويم الهجري لسنة كاملة؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "يوفر الموقع صفحة خاصة بالتقويم الهجري السنوي. يمكنك اختيار أي سنة هجرية من 1318 إلى 1500 ومشاهدة جميع أشهرها مع التواريخ الميلادية المقابلة لكل يوم."
+      }
+    }
   ]
 }
 
@@ -118,17 +158,27 @@ const breadcrumbSchema = {
   ]
 }
 
-const combinedSchema = [webAppSchema, faqSchema, breadcrumbSchema]
-
 export default function Home() {
   const { hijri, gregorian } = getTodayDates()
   
   return (
     <PageLayout>
-      {/* Structured Data */}
+      {/* WebApplication Schema */}
       <script 
         type="application/ld+json" 
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(combinedSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
+      />
+      
+      {/* FAQ Schema */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      
+      {/* Breadcrumb Schema */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className="pattern-islamic">
@@ -236,6 +286,68 @@ export default function Home() {
             {/* Internal Links */}
             <InternalLinks type="all" />
             <InternalLinks type="cities" limit={6} />
+            
+            {/* FAQ Section */}
+            <section className="mt-8 bg-card border border-border rounded-xl p-6">
+              <h2 className="text-2xl font-bold text-foreground mb-6">الأسئلة الشائعة</h2>
+              <div className="space-y-6">
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">كيف أعرف تاريخ اليوم هجري؟</h3>
+                  <p className="text-foreground/80">
+                    يظهر تاريخ اليوم بالتقويم الهجري والميلادي تلقائياً في أعلى صفحة محول التاريخ. التاريخ يتم تحديثه يومياً ويعتمد على تقويم أم القرى الرسمي المعتمد في المملكة العربية السعودية.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">كيف أحول التاريخ من هجري لميلادي؟</h3>
+                  <p className="text-foreground/80">
+                    لتحويل التاريخ من هجري إلى ميلادي اتبع الخطوات التالية: 1) اختر "هجري إلى ميلادي" من أزرار التحويل 2) أدخل اليوم والشهر والسنة الهجرية 3) اضغط زر "تحويل" للحصول على التاريخ الميلادي المقابل فوراً بدقة عالية.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">كيف أحول التاريخ من ميلادي لهجري؟</h3>
+                  <p className="text-foreground/80">
+                    لتحويل التاريخ من ميلادي إلى هجري اتبع الخطوات: 1) اختر "ميلادي إلى هجري" من أزرار التحويل 2) أدخل اليوم والشهر والسنة الميلادية 3) اضغط زر "تحويل" للحصول على التاريخ الهجري المقابل بدقة مطابقة لتقويم أم القرى.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">هل تحويل التاريخ دقيق؟</h3>
+                  <p className="text-foreground/80">
+                    نعم، محول التاريخ يوفر دقة عالية في تحويل التاريخ بين التقويم الهجري والميلادي. نستخدم خوارزميات معتمدة ومطابقة لتقويم أم القرى الرسمي المعتمد في المملكة العربية السعودية.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">هل الموقع مجاني؟</h3>
+                  <p className="text-foreground/80">
+                    نعم، جميع خدمات محول التاريخ مجانية بالكامل. يمكنك تحويل التاريخ، حساب العمر، الاطلاع على التقويم الهجري، ومعرفة تاريخ اليوم بدون أي رسوم أو اشتراكات.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">كيف أحسب عمري بالهجري؟</h3>
+                  <p className="text-foreground/80">
+                    يوفر الموقع <Link href="/how-old-am-i/hijri" className="text-primary hover:underline">أداة خاصة لحساب العمر</Link> بالتقويم الهجري. انتقل إلى صفحة حساب العمر، أدخل تاريخ ميلادك الهجري أو الميلادي، وسيحسب الموقع عمرك بالسنوات والأشهر والأيام الهجرية بدقة.
+                  </p>
+                </div>
+                
+                <div className="border-b border-border pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">ما هو تقويم أم القرى؟</h3>
+                  <p className="text-foreground/80">
+                    تقويم أم القرى هو التقويم الهجري الرسمي المعتمد في المملكة العربية السعودية. يتم استخدامه في جميع المعاملات الرسمية والوثائق الحكومية. محول التاريخ يعتمد على هذا التقويم لضمان الدقة.
+                  </p>
+                </div>
+                
+                <div className="pb-4 last:border-b-0">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">كيف أعرف التقويم الهجري لسنة كاملة؟</h3>
+                  <p className="text-foreground/80">
+                    يوفر الموقع <Link href={`/calendar/${hijri.year}`} className="text-primary hover:underline">صفحة خاصة بالتقويم الهجري</Link> السنوي. يمكنك اختيار أي سنة هجرية من 1318 إلى 1500 ومشاهدة جميع أشهرها مع التواريخ الميلادية المقابلة لكل يوم.
+                  </p>
+                </div>
+              </div>
+            </section>
             
             {/* Lazy load SEO content */}
             <Suspense fallback={null}>
