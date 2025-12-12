@@ -8,11 +8,6 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
-  // تحسين CSS
-  experimental: {
-    optimizeCss: true,
-  },
-  
   images: {
     domains: [],
   },
