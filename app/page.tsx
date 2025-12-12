@@ -1,8 +1,10 @@
 import DateConverter from '@/components/DateConverter'
 import { PageLayout } from '@/components/PageLayout'
-import { getTodayDates } from '@/lib/hijriConverter'
 import type { Metadata } from 'next'
 import SEOContent from '@/components/SEOContent'
+
+// Static year to avoid hydration mismatch
+const CURRENT_HIJRI_YEAR = 1446;
 
 export const metadata: Metadata = {
   title: 'تحويل التاريخ الهجري والميلادي - محول دقيق ومجاني',
@@ -49,8 +51,6 @@ const breadcrumbSchema = {
 }
 
 export default function Home() {
-  const { hijri, gregorian } = getTodayDates()
-  
   return (
     <PageLayout>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }} />
@@ -75,7 +75,7 @@ export default function Home() {
               واطلع على اليوم الحالي عبر تقويم أم القرى الرسمي.
               <br />
               <span className="text-primary font-semibold mt-2 inline-block">
-                خدمة مجانية - {hijri.year} هـ
+                خدمة مجانية - {CURRENT_HIJRI_YEAR} هـ
               </span>
             </p>
           </div>

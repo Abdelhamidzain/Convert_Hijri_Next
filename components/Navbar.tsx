@@ -1,21 +1,27 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { getTodayDates } from '@/lib/hijriConverter';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentYear, setCurrentYear] = useState(1446); // Default static year
   const pathname = usePathname();
-  const { hijri } = getTodayDates();
+  
+  // Set the actual year only on client side to avoid hydration mismatch
+  useEffect(() => {
+    const { hijri } = getTodayDates();
+    setCurrentYear(hijri.year);
+  }, []);
   
   const isActive = (path: string) => pathname === path;
   
   const navLinks = [
     { href: '/', label: 'تحويل التاريخ', title: 'محول التاريخ الهجري والميلادي' },
     { href: '/date/today', label: 'تاريخ اليوم', title: 'تاريخ اليوم هجري وميلادي' },
-    { href: `/calendar/${hijri.year}`, label: `التقويم ${hijri.year}`, title: `التقويم الهجري ${hijri.year}` },
+    { href: `/calendar/${currentYear}`, label: `التقويم ${currentYear}`, title: `التقويم الهجري ${currentYear}` },
     { href: '/how-old-am-i/hijri', label: 'حساب العمر', title: 'حساب العمر بالهجري والميلادي' },
   ];
   
