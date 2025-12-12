@@ -1,13 +1,8 @@
-import { Suspense } from 'react'
 import DateConverter from '@/components/DateConverter'
 import { PageLayout } from '@/components/PageLayout'
 import { getTodayDates } from '@/lib/hijriConverter'
 import type { Metadata } from 'next'
-
-import dynamic from 'next/dynamic'
-const SEOContent = dynamic(() => import('@/components/SEOContent'), {
-  ssr: false,
-})
+import SEOContent from '@/components/SEOContent'
 
 export const metadata: Metadata = {
   title: 'تحويل التاريخ الهجري والميلادي - محول دقيق ومجاني',
@@ -362,9 +357,7 @@ export default function Home() {
               </div>
             </section>
             
-            <Suspense fallback={null}>
-              <SEOContent />
-            </Suspense>
+            <SEOContent />
           </div>
         </div>
       </div>

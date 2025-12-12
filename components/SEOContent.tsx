@@ -1,113 +1,81 @@
-'use client'
+import React from "react";
 
-import React, { useState, useEffect } from "react";
-
-type IconProps = React.SVGProps<SVGSVGElement>;
-
-const MoonIcon: React.FC<IconProps> = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-primary" {...props}>
+// Static SVG Icons - No client-side overhead
+const MoonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6 text-primary">
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
   </svg>
 );
 
-const CheckIcon: React.FC<IconProps> = (props) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-primary flex-shrink-0" {...props}>
+const CheckIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-primary flex-shrink-0">
     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
     <polyline points="22 4 12 14.01 9 11.01" />
   </svg>
 );
 
-const ChevronIcon: React.FC<IconProps & { isOpen: boolean }> = ({ isOpen, ...props }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`w-5 h-5 transition-transform ${isOpen ? 'rotate-180' : ''}`} {...props}>
-    <polyline points="6 9 12 15 18 9" />
-  </svg>
-);
+// Static data
+const hijriMonths = [
+  { num: 1, name: "محرم", note: "رأس السنة" },
+  { num: 2, name: "صفر" },
+  { num: 3, name: "ربيع الأول", note: "المولد النبوي" },
+  { num: 4, name: "ربيع الآخر" },
+  { num: 5, name: "جمادى الأولى" },
+  { num: 6, name: "جمادى الآخرة" },
+  { num: 7, name: "رجب", note: "الإسراء والمعراج" },
+  { num: 8, name: "شعبان" },
+  { num: 9, name: "رمضان", note: "شهر الصيام" },
+  { num: 10, name: "شوال", note: "عيد الفطر" },
+  { num: 11, name: "ذو القعدة" },
+  { num: 12, name: "ذو الحجة", note: "الحج والأضحى" },
+];
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-const SEOContent: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [openFAQ, setOpenFAQ] = useState<number | null>(null);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 50);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const hijriMonths = [
-    { num: 1, name: "محرم", note: "رأس السنة" },
-    { num: 2, name: "صفر" },
-    { num: 3, name: "ربيع الأول", note: "المولد النبوي" },
-    { num: 4, name: "ربيع الآخر" },
-    { num: 5, name: "جمادى الأولى" },
-    { num: 6, name: "جمادى الآخرة" },
-    { num: 7, name: "رجب", note: "الإسراء والمعراج" },
-    { num: 8, name: "شعبان" },
-    { num: 9, name: "رمضان", note: "شهر الصيام" },
-    { num: 10, name: "شوال", note: "عيد الفطر" },
-    { num: 11, name: "ذو القعدة" },
-    { num: 12, name: "ذو الحجة", note: "الحج والأضحى" },
-  ];
-
-  const faqItems: FAQItem[] = [
-    {
-      question: "كيف أقوم بتحويل التاريخ من هجري إلى ميلادي؟",
-      answer: "أدخل اليوم والشهر والسنة بالنظام القمري في الحقول المخصصة، ثم انقر زر التبديل. ستظهر النتيجة فوراً. المحول يعتمد على تقويم أم القرى الرسمي لضمان الدقة بنسبة 100%."
-    },
-    {
-      question: "ما الفرق بين التقويم الهجري والميلادي؟",
-      answer: "النظام القمري يعتمد على دورات القمر (354-355 يوماً سنوياً)، بينما النظام الشمسي يعتمد على دورة الأرض حول الشمس (365 يوماً). الفرق بينهما نحو 11 يوماً سنوياً، لذا التبديل ضروري للمطابقة."
-    },
-    {
-      question: "هل يمكن التحويل بالاتجاه المعاكس بدقة؟",
-      answer: "نعم، يمكنك التبديل بالاتجاهين بدقة تامة. أدخل البيانات المطلوبة، وسيُحسب المقابل باستخدام خوارزمية دقيقة تطابق تقويم أم القرى. الخدمة توفر نتائج فورية بسهولة."
-    },
-    {
-      question: "هل الخدمة مجانية؟",
-      answer: "نعم، جميع الخدمات مجانية تماماً. يمكنك التبديل بين النظامين، حساب العمر، ومعرفة اليوم الحالي على الإنترنت بدون أي رسوم أو اشتراكات."
-    },
-    {
-      question: "كيف أحسب عمري بالنظامين؟",
-      answer: "استخدم حاسبة العمر المتوفرة بالموقع. أدخل يوم ولادتك بأي نظام تفضله، وستحصل على عمرك بالسنوات والأشهر والأيام بدقة. خدمة مفيدة للتسجيل في البرامج الحكومية."
-    },
-    {
-      question: "ما هو تقويم أم القرى؟",
-      answer: "تقويم أم القرى هو النظام القمري الرسمي المعتمد في المملكة العربية السعودية منذ عام 1346 هـ. يُستخدم في المعاملات الرسمية وتحديد المناسبات الدينية. المحول يعتمد عليه لضمان الدقة."
-    },
-    {
-      question: "كيف أعرف اليوم الحالي بالنظام القمري؟",
-      answer: "اليوم الحالي يظهر تلقائياً أعلى الصفحة بالنظامين معاً. يتم تحديثه يومياً بشكل آلي وفق تقويم أم القرى. يمكنك زيارة صفحة اليوم للتفاصيل الكاملة."
-    },
-    {
-      question: "هل يدعم الموقع مدناً مختلفة؟",
-      answer: "نعم، الموقع يوفر الخدمة ومعرفة اليوم الحالي لجميع المدن السعودية الكبرى مثل مكة المكرمة، الرياض، جدة، والمدينة المنورة. كما يعرض مواقيت الصلاة حسب موقعك بسهولة."
-    }
-  ];
-
-  const occasions = [
-    "رمضان - شهر الصيام المبارك",
-    "عيد الفطر - أول شوال",
-    "موسم الحج - في ذي الحجة",
-    "عيد الأضحى - العاشر من ذي الحجة",
-    "المولد النبوي - 12 ربيع الأول",
-    "يوم عاشوراء - 10 محرم"
-  ];
-
-  if (!isLoaded) {
-    return (
-      <section className="mt-16 space-y-12">
-        <div className="bg-card rounded-2xl p-6 md:p-8 shadow-soft border border-border/30 animate-pulse">
-          <div className="h-8 bg-muted rounded w-3/4 mb-4"></div>
-          <div className="h-4 bg-muted rounded w-full mb-2"></div>
-          <div className="h-4 bg-muted rounded w-5/6"></div>
-        </div>
-      </section>
-    );
+const faqItems = [
+  {
+    q: "كيف أقوم بتحويل التاريخ من هجري إلى ميلادي؟",
+    a: "أدخل اليوم والشهر والسنة بالنظام القمري في الحقول المخصصة، ثم انقر زر التبديل. ستظهر النتيجة فوراً. المحول يعتمد على تقويم أم القرى الرسمي لضمان الدقة بنسبة 100%."
+  },
+  {
+    q: "ما الفرق بين التقويم الهجري والميلادي؟",
+    a: "النظام القمري يعتمد على دورات القمر (354-355 يوماً سنوياً)، بينما النظام الشمسي يعتمد على دورة الأرض حول الشمس (365 يوماً). الفرق بينهما نحو 11 يوماً سنوياً."
+  },
+  {
+    q: "هل يمكن التحويل بالاتجاه المعاكس بدقة؟",
+    a: "نعم، يمكنك التبديل بالاتجاهين بدقة تامة. أدخل البيانات المطلوبة، وسيُحسب المقابل باستخدام خوارزمية دقيقة تطابق تقويم أم القرى."
+  },
+  {
+    q: "هل الخدمة مجانية؟",
+    a: "نعم، جميع الخدمات مجانية تماماً. يمكنك التبديل بين النظامين، حساب العمر، ومعرفة اليوم الحالي بدون أي رسوم."
+  },
+  {
+    q: "كيف أحسب عمري بالنظامين؟",
+    a: "استخدم حاسبة العمر المتوفرة بالموقع. أدخل يوم ولادتك بأي نظام تفضله، وستحصل على عمرك بالسنوات والأشهر والأيام بدقة."
+  },
+  {
+    q: "ما هو تقويم أم القرى؟",
+    a: "تقويم أم القرى هو النظام القمري الرسمي المعتمد في المملكة العربية السعودية منذ عام 1346 هـ. يُستخدم في المعاملات الرسمية."
+  },
+  {
+    q: "كيف أعرف اليوم الحالي بالنظام القمري؟",
+    a: "اليوم الحالي يظهر تلقائياً أعلى الصفحة بالنظامين معاً. يتم تحديثه يومياً بشكل آلي وفق تقويم أم القرى."
+  },
+  {
+    q: "هل يدعم الموقع مدناً مختلفة؟",
+    a: "نعم، الموقع يوفر الخدمة لجميع المدن السعودية الكبرى مثل مكة المكرمة، الرياض، جدة، والمدينة المنورة."
   }
+];
 
+const occasions = [
+  "رمضان - شهر الصيام المبارك",
+  "عيد الفطر - أول شوال",
+  "موسم الحج - في ذي الحجة",
+  "عيد الأضحى - العاشر من ذي الحجة",
+  "المولد النبوي - 12 ربيع الأول",
+  "يوم عاشوراء - 10 محرم"
+];
+
+// Server Component - No client-side JavaScript
+const SEOContent: React.FC = () => {
   return (
     <section className="mt-16 space-y-12">
       {/* اليوم الحالي */}
@@ -186,7 +154,7 @@ const SEOContent: React.FC = () => {
         </div>
       </article>
 
-      {/* الأسئلة الشائعة */}
+      {/* الأسئلة الشائعة - CSS-only accordion */}
       <article className="bg-card rounded-2xl p-6 md:p-8 shadow-soft border border-border/30">
         <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
           <span className="text-2xl">❓</span>
@@ -194,20 +162,17 @@ const SEOContent: React.FC = () => {
         </h2>
         <div className="space-y-3">
           {faqItems.map((faq, index) => (
-            <div key={index} className="border border-border/50 rounded-xl overflow-hidden">
-              <button
-                onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
-                className="w-full px-5 py-4 text-right flex items-center justify-between gap-4 hover:bg-primary/5 transition-colors"
-              >
-                <span className="font-semibold text-foreground">{faq.question}</span>
-                <ChevronIcon isOpen={openFAQ === index} />
-              </button>
-              {openFAQ === index && (
-                <div className="px-5 pb-4 text-foreground/80 leading-relaxed border-t border-border/30 pt-3">
-                  {faq.answer}
-                </div>
-              )}
-            </div>
+            <details key={index} className="group border border-border/50 rounded-xl overflow-hidden">
+              <summary className="px-5 py-4 cursor-pointer flex items-center justify-between gap-4 hover:bg-primary/5 transition-colors font-semibold text-foreground list-none">
+                {faq.q}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 transition-transform group-open:rotate-180">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <div className="px-5 pb-4 text-foreground/80 leading-relaxed border-t border-border/30 pt-3">
+                {faq.a}
+              </div>
+            </details>
           ))}
         </div>
       </article>
